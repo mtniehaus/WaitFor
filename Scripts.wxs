@@ -1,0 +1,10 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="Scripts" Directory="INSTALLFOLDER">
+      <Component Guid="695C7D14-E8FE-42E8-BF7E-C44E50FBFEA3">
+        <File Source="Initialize.ps1" />
+        <File Source="Done.ps1" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
