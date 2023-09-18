@@ -6,6 +6,7 @@ $suffix = Get-Random -Minimum 1 -Maximum 99999
 $provider = "WaitFor$suffix"
 New-Item -Path "HKLM:\Software\Oofhours"
 Set-ItemProperty -Path "HKLM:\Software\Oofhours" -Name "PolicyProvider" -Value $provider
+Remove-ItemProperty -Path "HKLM:\Software\Oofhours" -Name "Done" -ErrorAction SilentlyContinue
 
 # Load the LocalMDM module
 
