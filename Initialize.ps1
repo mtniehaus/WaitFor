@@ -2,8 +2,8 @@ Start-Transcript "C:\Windows\Temp\WaitFor-Initialize.log" -Append
 
 # Check to see if we already ran (just in case Intune tries to reinstall)
 
-$provider = (Get-ItemProperty "HKlM:\Software\Oofhours" -Name "PolicyProvider").PolicyProvider
-if ($null -ne $provider) {
+$properties = Get-ItemProperty "HKlM:\Software\Oofhours" -Name "PolicyProvider" -ErrorAction SilentlyContinue
+if ($null -ne $properties) {
 	Write-Host "WaitFor already initialized, exiting"
 	Exit 0
 }

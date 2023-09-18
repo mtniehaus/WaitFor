@@ -1,5 +1,5 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Name="WaitFor" Manufacturer="Oofhours" Version="1.0.0.44" UpgradeCode="eb24d7ef-ac5f-4b7e-97ce-bcae8accba5b">
+  <Package Name="WaitFor" Manufacturer="Oofhours" Version="1.0.0.46" UpgradeCode="eb24d7ef-ac5f-4b7e-97ce-bcae8accba5b">
     <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
     <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes"/>
