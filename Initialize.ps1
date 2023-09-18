@@ -1,12 +1,19 @@
 Start-Transcript "C:\Windows\Temp\WaitFor-Initialize.log" -Append
 
+# Check to see if we already ran (just in case Intune tries to reinstall)
+
+$provider = (Get-ItemProperty "HKlM:\Software\Oofhours" -Name "PolicyProvider").PolicyProvider
+if ($null -ne $provider) {
+	Write-Host "WaitFor already initialized, exiting"
+	Exit 0
+}
+
 # Generate a random provider name just so NodeCache doesn't get in the way.  Save it in the registry
 
 $suffix = Get-Random -Minimum 1 -Maximum 99999
 $provider = "WaitFor$suffix"
 New-Item -Path "HKLM:\Software\Oofhours"
 Set-ItemProperty -Path "HKLM:\Software\Oofhours" -Name "PolicyProvider" -Value $provider
-Remove-ItemProperty -Path "HKLM:\Software\Oofhours" -Name "Done" -ErrorAction SilentlyContinue
 
 # Load the LocalMDM module
 
