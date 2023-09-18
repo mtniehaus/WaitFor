@@ -1,9 +1,17 @@
 Start-Transcript "C:\Windows\Temp\WaitFor-Done.log"
 
+Import-Module LocalMDM
+
+# Get the policy provider name
+
+$provider = (Get-ItemProperty "HKlM:\Software\Oofhours" -Name "PolicyProvider").PolicyProvider
+
 # Report that the app is done
 
-$app = Get-CimInstance -Namespace root\cimv2\mdm\dmmap -ClassName MDM_EnrollmentStatusTracking_Tracking03_02 -Filter "InstanceID = 'WaitForApp'"
-$app.InstallationState = 3
-Set-CimInstance -CimInstance $app
+$result = Send-LocalMDMRequest -OmaUri "./Device/Vendor/MSFT/EnrollmentStatusTracking/Setup/Apps/Tracking/$provider/WaitApp/InstallationState" -Cmd Add -Format int -Data 3
+$result | Out-Host
+
+$result = Send-LocalMDMRequest -OmaUri "./Device/Vendor/MSFT/EnrollmentStatusTracking/Setup/Apps/Tracking/$provider/WaitApp/InstallationState" -Cmd Replace -Format int -Data 3
+$result | Out-Host
 
 Stop-Transcript
